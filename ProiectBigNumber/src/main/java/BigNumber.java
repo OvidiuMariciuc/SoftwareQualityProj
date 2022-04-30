@@ -151,6 +151,63 @@ public class BigNumber implements Comparable<BigNumber> {
 
         }
     }
+    public void multiply (BigNumber y) {
+        char[] yChars = y.chars();
+        String num = this.getValue();
+        this.setValue(0);
+
+        for(int i = 0; i<y.length(); i++) {
+            int digit = Character.getNumericValue(yChars[yChars.length-1-i]);
+            this.add(new BigNumber(multiplyByInt(digit,num,i,0,new StringBuilder())));
+        }
+    }
+    private static String multiplyByInt(int x, String num, int powerOf10, int overflow, StringBuilder sb) {
+        if(num.length() == 0) {
+
+            return (overflow == 0 ?"": Integer.toString(overflow))
+                    + sb.reverse().toString()
+                    +"0".repeat(powerOf10);
+        }
+
+        final char digit = num.toCharArray()[num.length() - 1];
+        final int product = Character.getNumericValue(digit)* x + overflow;
+        sb.append(product % 10);
+
+        return multiplyByInt(x,num.substring(0,num.length() - 1), powerOf10, product/10, sb);
+    }
+    public void div(int divisor) {
+        if(divisor == 0) {
+            throw new IllegalArgumentException("the divisor must be different from 0");
+        }
+        else {
+            StringBuilder quotient = new StringBuilder();
+            char[] dividend = this.chars();
+            int overflow = 0;
+
+            for(int i = 0; i<dividend.length; i++)
+            {
+                int digit = overflow * 10 + Character.getNumericValue(dividend[i]);
+                quotient.append(digit/divisor);
+                overflow = digit % divisor;
+            }
+
+            while(quotient.charAt(0) == '0')
+                quotient.deleteCharAt(0);
+
+            this.setValue(quotient.toString());
+        }
+    }
+    public void power(long n) {
+        if(n == 0) {
+            this.setValue(1);
+        }
+        else {
+            BigNumber initial = new BigNumber(this.value);
+            for(int i = 1; i<n; i++) {
+                this.multiply(initial);
+            }
+        }
+    }
 
     @Override
     public String toString() {

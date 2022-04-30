@@ -9,6 +9,11 @@ public class Test {
 
         BigNumber test5= new BigNumber("1000000");
         BigNumber test6 = new BigNumber("999978");
+
+        BigNumber test7 = new BigNumber("145555");
+        BigNumber test8 = new BigNumber("2555");
+
+        BigNumber test9 = new BigNumber("255");
 //        BigNumber test3 = new BigNumber(-123);
 
         System.out.println(test.toString());
@@ -24,7 +29,14 @@ public class Test {
         test5.add(test6);
         System.out.println(test5.toString());
 
-//        test3.sub(test4);
+//        test7.div(2);
+//        System.out.println(test7.toString());
+
+        test7.multiply(test8);
+        System.out.println(test7.toString());
+        test9.power(7);
+        System.out.println(test9.toString());
+        //        test3.sub(test4);
 //        System.out.println(test3.toString());
 //        System.out.println(test.toString().equals(test2));
     }

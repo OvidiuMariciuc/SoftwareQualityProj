@@ -1,0 +1,159 @@
+import java.io.*;
+
+public class BigNumber implements Comparable<BigNumber> {
+
+    private String value;
+
+    public BigNumber() {
+        value = "0";
+    }
+
+    public BigNumber(String value) {
+        for (int i = 0; i < value.length(); i++) {
+            if (!Character.isDigit(value.charAt(i))) {
+                throw new IllegalArgumentException("the number provided contains illegal characters");
+            }
+        }
+        if (value.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        this.value = value;
+    }
+
+    public BigNumber(int value) {
+        if (value < 0)
+            throw new IllegalArgumentException("the number provided must be positive");
+        this.value = Integer.toString(value);
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setValue(int value) {
+        this.value = Integer.toString(value);
+    }
+
+    public int length() {
+        return value.length();
+    }
+
+    public char[] chars() {
+        return this.value.toCharArray();
+    }
+
+    @Override
+    public int compareTo(BigNumber number) {
+        if (this.length() > number.length())
+            return 1;
+        if (this.length() < number.length())
+            return -1;
+
+        char[] valueChars = this.chars();
+        char[] numberChars = number.chars();
+
+        for (int i = 0; i < this.length(); i++) {
+
+            int valueDigit = Character.getNumericValue(valueChars[i]);
+            int numberDigit = Character.getNumericValue(numberChars[i]);
+
+            if (valueDigit > numberDigit)
+                return 1;
+            if (valueDigit < numberDigit)
+                return -1;
+        }
+
+        return 0;
+
+    }
+
+    //retuning two BigNumbers as Strings with the same length
+    //by adding zeroes to front if one is shorter than the other
+    // equalLengths(9998, 68) -> String[] = {9998, 0068}
+    private static String[] equalLengths(BigNumber x, BigNumber y) {
+        String xVal;
+        String yVal;
+
+        if (x.length() == y.length()) {
+            xVal = x.getValue();
+            yVal = y.getValue();
+        } else if (x.length() > y.length()) {
+            xVal = x.getValue();
+            yVal = "0".repeat(x.length() - y.length()) + y.getValue();
+        } else {
+            yVal = y.getValue();
+            xVal = "0".repeat(y.length() - x.length()) + x.getValue();
+        }
+
+        return new String[]{xVal, yVal};
+    }
+
+    //x1.add(x2) => x1 = x1 + x2;
+    public void add(BigNumber number) {
+
+        String[] numbers = equalLengths(number, this);
+        char[] valueChars = numbers[0].toCharArray();
+        char[] numberChars = numbers[1].toCharArray();
+
+        int overflow = 0;
+
+        StringBuilder result = new StringBuilder();
+        for (int i = valueChars.length - 1; i >= 0; i--) {
+
+            int valueDigit = Character.getNumericValue(valueChars[i]);
+            int numberDigit = Character.getNumericValue(numberChars[i]);
+            int digitSum = valueDigit + numberDigit + overflow;
+
+            result.append(digitSum % 10);
+            overflow = digitSum / 10;
+        }
+
+        this.value = (overflow == 0 ? "" : "1") + result.reverse().toString();
+    }
+
+    public void sub(BigNumber number) {
+        int compare = this.compareTo(number);
+        if (compare == 0) {
+            this.setValue(0);
+        } else if (compare < 0) {
+            throw new IllegalArgumentException("the difference must be positive");
+        } else {
+
+            String[] numbers = equalLengths(number, this);
+            char[] valueChars = numbers[1].toCharArray();
+            char[] numberChars = numbers[0].toCharArray();
+
+            int overflow = 0;
+            StringBuilder result = new StringBuilder();
+            for (int i = valueChars.length - 1; i >= 0; i--) {
+
+                int valueDigit = Character.getNumericValue(valueChars[i]) + overflow;
+                int numberDigit = Character.getNumericValue(numberChars[i]);
+                overflow = 0;
+
+                if (valueDigit < numberDigit) {
+                    overflow = -1;
+                    valueDigit += 10;
+                }
+
+                result.append(valueDigit - numberDigit);
+            }
+
+            while (result.charAt(result.length() - 1) == '0') {
+                result.deleteCharAt(result.length() - 1);
+            }
+
+            this.setValue(result.reverse().toString());
+
+        }
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+}

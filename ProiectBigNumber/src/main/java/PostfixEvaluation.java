@@ -26,9 +26,9 @@ public class PostfixEvaluation
                     case "+": postFix.push(new BigNumber(BigNumber.add(op1.getValue(), op2.getValue())));
                         break;
 
-//                    case "-": postFix.push(op2 - op1);
-//                        break;
-//
+                    case "-": postFix.push(new BigNumber(BigNumber.substract(op1.getValue(), op2.getValue())));
+                        break;
+
 //                    case "*": postFix.push(op2 * op1);
 //                        break;
 //

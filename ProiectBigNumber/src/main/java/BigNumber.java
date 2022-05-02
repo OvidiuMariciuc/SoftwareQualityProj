@@ -215,6 +215,12 @@ public class BigNumber implements Comparable<BigNumber> {
         return result.getValue();
     }
 
+    public static String substract(String x, String y){
+        BigNumber result = new BigNumber(x);
+        result.sub(new BigNumber(y));
+        return result.getValue();
+    }
+
     @Override
     public String toString() {
         return value;

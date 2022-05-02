@@ -151,18 +151,18 @@ public class BigNumber implements Comparable<BigNumber> {
         }
     }
 
-    public void multiply(BigNumber y) {
+    public void mult(BigNumber y) {
         char[] yChars = y.chars();
         String num = this.getValue();
         this.setValue(0);
 
         for (int i = 0; i < y.length(); i++) {
             int digit = Character.getNumericValue(yChars[yChars.length - 1 - i]);
-            this.add(new BigNumber(multiplyByInt(digit, num, i, 0, new StringBuilder())));
+            this.add(new BigNumber(multByInt(digit, num, i, 0, new StringBuilder())));
         }
     }
 
-    private static String multiplyByInt(int x, String num, int powerOf10, int overflow, StringBuilder sb) {
+    private static String multByInt(int x, String num, int powerOf10, int overflow, StringBuilder sb) {
         if (num.length() == 0) {
 
             return (overflow == 0 ? "" : Integer.toString(overflow))
@@ -174,7 +174,7 @@ public class BigNumber implements Comparable<BigNumber> {
         final int product = Character.getNumericValue(digit) * x + overflow;
         sb.append(product % 10);
 
-        return multiplyByInt(x, num.substring(0, num.length() - 1), powerOf10, product / 10, sb);
+        return multByInt(x, num.substring(0, num.length() - 1), powerOf10, product / 10, sb);
     }
 
     public void div(int divisor) {
@@ -204,7 +204,7 @@ public class BigNumber implements Comparable<BigNumber> {
         } else {
             BigNumber initial = new BigNumber(this.value);
             for (int i = 1; i < n; i++) {
-                this.multiply(initial);
+                this.mult(initial);
             }
         }
     }
@@ -218,6 +218,12 @@ public class BigNumber implements Comparable<BigNumber> {
     public static String substract(String x, String y){
         BigNumber result = new BigNumber(x);
         result.sub(new BigNumber(y));
+        return result.getValue();
+    }
+
+    public static String multiply(String x, String y){
+        BigNumber result = new BigNumber(x);
+        result.mult(new BigNumber(y));
         return result.getValue();
     }
 

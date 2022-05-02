@@ -32,7 +32,6 @@ public class Test {
 //        test7.div(2);
 //        System.out.println(test7.toString());
 
-        test7.multiply(test8);
         System.out.println(test7.toString());
         test9.power(7);
         System.out.println(test9.toString());

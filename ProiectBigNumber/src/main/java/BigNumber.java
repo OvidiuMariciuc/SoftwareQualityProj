@@ -227,6 +227,12 @@ public class BigNumber implements Comparable<BigNumber> {
         return result.getValue();
     }
 
+    public static String divide(String x, int y){
+        BigNumber result = new BigNumber(x);
+        result.div(y);
+        return result.getValue();
+    }
+
     @Override
     public String toString() {
         return value;

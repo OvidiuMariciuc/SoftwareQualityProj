@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        String exp = "( 145555 / 5 ) + 300000000000";
+        String exp = "9 ^ 2";
         System.out.println("Infix Expression: " + exp);
         System.out.println("Postfix Expression: " + InfixToPostFix.infixToPostFix(exp));
 

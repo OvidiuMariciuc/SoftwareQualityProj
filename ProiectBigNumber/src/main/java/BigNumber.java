@@ -198,7 +198,7 @@ public class BigNumber implements Comparable<BigNumber> {
         }
     }
 
-    public void power(long n) {
+    public void pow(long n) {
         if (n == 0) {
             this.setValue(1);
         } else {
@@ -230,6 +230,12 @@ public class BigNumber implements Comparable<BigNumber> {
     public static String divide(String x, int y){
         BigNumber result = new BigNumber(x);
         result.div(y);
+        return result.getValue();
+    }
+
+    public static String power(String x, String y){
+        BigNumber result = new BigNumber(x);
+        result.pow(Long.parseLong(y));
         return result.getValue();
     }
 

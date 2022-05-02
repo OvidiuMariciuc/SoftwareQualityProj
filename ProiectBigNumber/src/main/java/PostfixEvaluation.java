@@ -35,9 +35,9 @@ public class PostfixEvaluation
                     case "/": postFix.push(new BigNumber(BigNumber.divide(op2.getValue(), Integer.parseInt(op1.getValue()))));
                         break;
 
-//                    case "^": postFix.push(op2 ^ op1);
-//                       // not working yet
-//                        break;
+                    case "^": postFix.push(new BigNumber(BigNumber.power(op1.getValue(), op2.getValue())));
+                       // not working yet
+                        break;
                 }
 
             }

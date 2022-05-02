@@ -33,7 +33,7 @@ public class Test {
 //        System.out.println(test7.toString());
 
         System.out.println(test7.toString());
-        test9.power(7);
+        //test9.power(7);
         System.out.println(test9.toString());
         //        test3.sub(test4);
 //        System.out.println(test3.toString());

@@ -8,43 +8,44 @@ public class PostfixEvaluation
         return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/") || operator.equals("^");
     }
 
-    static int evaluatePostfix(String expression)
+    static BigNumber evaluatePostfix(String expression)
     {
         String[] exp = expression.split(" ");
-        Stack<Integer> postFix = new Stack<>();
+        Stack<BigNumber> postFix = new Stack<>();
         int n = exp.length;
 
         for(int i=0;i<n;i++)
         {
             if(isOperator(exp[i]))
             {
-                int op1 = postFix.pop();
-                int op2 = postFix.pop();
+                BigNumber op1 = postFix.pop();
+                BigNumber op2 = postFix.pop();
 
                 switch(exp[i])
                 {
-                    case "+": postFix.push(op2 + op1);
+                    case "+": postFix.push(new BigNumber(BigNumber.add(op1.getValue(), op2.getValue())));
                         break;
 
-                    case "-": postFix.push(op2 - op1);
-                        break;
-
-                    case "*": postFix.push(op2 * op1);
-                        break;
-
-                    case "/": postFix.push(op2 / op1);
-                        break;
-
-                    case "^": postFix.push(op2 ^ op1);
-                       // not working yet
-                        break;
+//                    case "-": postFix.push(op2 - op1);
+//                        break;
+//
+//                    case "*": postFix.push(op2 * op1);
+//                        break;
+//
+//                    case "/": postFix.push(op2 / op1);
+//                        break;
+//
+//                    case "^": postFix.push(op2 ^ op1);
+//                       // not working yet
+//                        break;
                 }
 
             }
 
             else
             {
-                int operand = Integer.parseInt(exp[i]);
+//                int operand = Integer.parseInt(exp[i]);
+                BigNumber operand = new BigNumber(exp[i]);
                 postFix.push(operand);
             }
         }

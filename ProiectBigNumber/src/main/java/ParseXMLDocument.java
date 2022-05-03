@@ -38,19 +38,5 @@ public class ParseXMLDocument {
         }
 
     }
-    public String getExpr() {
-        return expr;
-    }
-
-    public void setExpr(String expr) {
-        this.expr = expr;
-    }
-
-    public Map<String, String> getKeyValueExp() {
-        return keyValueExp;
-    }
-
-    public void setKeyValueExp(Map<String, String> keyValueExp) {
-        this.keyValueExp = keyValueExp;
-    }
+  
 }

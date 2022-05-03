@@ -233,9 +233,11 @@ public class BigNumber implements Comparable<BigNumber> {
         return result.getValue();
     }
 
-    public static String power(String x, String y){
+    public static String power(String x, long y){
         BigNumber result = new BigNumber(x);
-        result.pow(Long.parseLong(y));
+        System.out.println(x);
+        System.out.println(y);
+        result.pow(y);
         return result.getValue();
     }
 

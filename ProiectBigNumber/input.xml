@@ -1,0 +1,17 @@
+<expr value="a ^ b / ( b + c ) + d * e">
+	<a>
+		<value>9</value>
+	</a>
+	<b>
+		<value>2</value>
+	</b>
+	<c>
+		<value>7</value>
+	</c>
+	<d>
+		<value>5</value>
+	</d>
+	<e>
+		<value>4</value>
+	</e>
+</expr>

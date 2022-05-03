@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class DialogBox {
     public static void main(String[] args) {
@@ -7,6 +8,7 @@ public class DialogBox {
         Object[] options1 = {"Evaluate expression", "Cancel"};
 
         JPanel myPanel = new JPanel();
+        myPanel.setPreferredSize(new Dimension(500, 300));
         myPanel.add(new JLabel("Please Enter expression: "));
         myPanel.add(xField);
         myPanel.add(Box.createHorizontalStrut(15)); // a spacer
@@ -20,14 +22,19 @@ public class DialogBox {
             System.out.println("Infix Expression: " + exp);
             System.out.println("Postfix Expression: " + InfixToPostFix.infixToPostFix(exp));
 
-            String postFixExp = InfixToPostFix.infixToPostFix(exp);
-            System.out.println(PostfixEvaluation.evaluatePostfix(postFixExp));
-            System.out.println(PostfixEvaluation.evaluationSteps);
-            JOptionPane.showMessageDialog(null, "Expression: " + exp + "\n" +
-                            "Each step of the evaluation: " + "\n"
-                            + PostfixEvaluation.evaluationSteps + "\n" + "Final result = "
-                            + PostfixEvaluation.evaluatePostfix(postFixExp),
-                    "ResultBox", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                String postFixExp = InfixToPostFix.infixToPostFix(exp);
+                System.out.println(PostfixEvaluation.evaluatePostfix(postFixExp));
+                System.out.println(PostfixEvaluation.evaluationSteps);
+                JOptionPane.showMessageDialog(null, "Expression: " + exp + "\n" +
+                                "Each step of the evaluation: " + "\n"
+                                + PostfixEvaluation.evaluationSteps + "\n" + "Final result = "
+                                + PostfixEvaluation.evaluatePostfix(postFixExp),
+                        "ResultBox", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Error!", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
 //        System.out.println();

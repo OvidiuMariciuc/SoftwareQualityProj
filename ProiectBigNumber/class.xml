@@ -1,0 +1,11 @@
+<expr value="( a + b ) ^ c">
+	<a>
+		<value>10</value>
+	</a>
+	<b>
+		<value>10</value>
+	</b>
+	<c>
+		<value>20</value>
+	</c>
+</expr>

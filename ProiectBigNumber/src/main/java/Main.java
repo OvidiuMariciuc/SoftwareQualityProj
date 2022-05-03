@@ -7,5 +7,17 @@ public class Main {
 
         String postFixExp = InfixToPostFix.infixToPostFix(exp);
         System.out.println(PostfixEvaluation.evaluatePostfix(postFixExp));
+
+        ParseXMLDocument doc = new ParseXMLDocument("class.xml");
+        doc.parseFileXML();
+        ConstructExprWithValue constructExprWithValueObject = new ConstructExprWithValue(doc.getExpr(), doc.getKeyValueExp());
+        String expXML = constructExprWithValueObject.constructExprWithValue();
+        System.out.println(expXML);
+
+        System.out.println("Infix Expression: " + expXML);
+        System.out.println("Postfix Expression: " + InfixToPostFix.infixToPostFix(expXML));
+
+        String postFixExp1 = InfixToPostFix.infixToPostFix(expXML);
+        System.out.println(PostfixEvaluation.evaluatePostfix(postFixExp1));
     }
 }

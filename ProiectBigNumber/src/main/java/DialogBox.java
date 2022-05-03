@@ -22,8 +22,11 @@ public class DialogBox {
 
             String postFixExp = InfixToPostFix.infixToPostFix(exp);
             System.out.println(PostfixEvaluation.evaluatePostfix(postFixExp));
-            JOptionPane.showMessageDialog(null,
-                    "Result of the evaluation = " + PostfixEvaluation.evaluatePostfix(postFixExp),
+            System.out.println(PostfixEvaluation.evaluationSteps);
+            JOptionPane.showMessageDialog(null, "Expression: " + exp + "\n" +
+                            "Each step of the evaluation: " + "\n"
+                            + PostfixEvaluation.evaluationSteps + "\n" + "Final result = "
+                            + PostfixEvaluation.evaluatePostfix(postFixExp),
                     "ResultBox", JOptionPane.INFORMATION_MESSAGE);
         }
 

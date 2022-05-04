@@ -73,7 +73,7 @@ public class BigNumber implements Comparable<BigNumber> {
     //retuning two BigNumbers as Strings with the same length
     //by adding zeroes to front if one is shorter than the other
     // equalLengths(9998, 68) -> String[] = {9998, 0068}
-    private static String[] equalLengths(BigNumber x, BigNumber y) {
+    public static String[] equalLengths(BigNumber x, BigNumber y) {
         String xVal;
         String yVal;
 

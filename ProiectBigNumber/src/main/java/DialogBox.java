@@ -8,7 +8,7 @@ public class DialogBox {
         Object[] options1 = {"Evaluate expression", "Cancel"};
 
         JPanel myPanel = new JPanel();
-        myPanel.setPreferredSize(new Dimension(500, 300));
+        myPanel.setPreferredSize(new Dimension(500, 500));
         myPanel.add(new JLabel("Please Enter expression: "));
         myPanel.add(xField);
         myPanel.add(Box.createHorizontalStrut(15)); // a spacer

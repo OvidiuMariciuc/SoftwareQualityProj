@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,8 @@ public class BigNumberTest {
     BigNumber number2;
     BigNumber number3;
     BigNumber number4;
+    BigNumber number5;
+    BigNumber number6;
 
     @BeforeEach
     void init() {
@@ -24,6 +27,12 @@ public class BigNumberTest {
 
         number4 = new BigNumber();
         number4.setValue("13389232");
+
+        number5 = new BigNumber();
+        number5.setValue("54312343123");
+
+        number6 = new BigNumber();
+        number6.setValue("1232133");
     }
 
     @Test
@@ -84,6 +93,31 @@ public class BigNumberTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             number4.sub(number3);
         });
+
+    }
+    @Test
+    public void multiplyTest() {
+        assertEquals("66920030269171359", BigNumber.multiply(number5.toString(), number6.toString()));
+    }
+
+    @Test
+    public void divWithoutErrorTest() {
+        assertEquals("10862468624", BigNumber.divide(number5.toString(), 5));
+    }
+
+    @Test
+    public void divWithErrorTest() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            number5.div(0);
+        });
+
+        Assertions.assertEquals("the divisor must be different from 0", exception.getMessage());
+
+    }
+
+    @Test
+    public void powerTest() {
+        assertEquals("472598889541954688994529153562626065538335685532371843", BigNumber.power(number5.toString(), 5));
 
     }
 

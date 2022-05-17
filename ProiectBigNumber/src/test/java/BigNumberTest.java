@@ -70,7 +70,14 @@ public class BigNumberTest {
         assertArrayEquals(expectedResults, results);
 
     }
+    @Test
+    public void constructorWithNegativeNumberTest() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new BigNumber(-55555);
+        });
 
+        Assertions.assertEquals("the number provided must be positive", exception.getMessage());
+    }
     @Test
     public void addTest() {
 
@@ -94,6 +101,10 @@ public class BigNumberTest {
             number4.sub(number3);
         });
 
+    }
+    @Test
+    public void subtractionTest() {
+        assertEquals("54311110990", BigNumber.substract(number5.toString(), number6.toString()));
     }
     @Test
     public void multiplyTest() {
@@ -120,5 +131,11 @@ public class BigNumberTest {
         assertEquals("472598889541954688994529153562626065538335685532371843", BigNumber.power(number5.toString(), 5));
 
     }
+    @Test
+    public void power0Test() {
+        assertEquals("1", BigNumber.power(number5.toString(), 0));
+
+    }
+
 
 }

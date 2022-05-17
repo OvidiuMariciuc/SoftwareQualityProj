@@ -12,14 +12,12 @@ import org.w3c.dom.Element;
 import java.io.File;
 
 public class ResultInXMLFile {
-    public static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
     public static void createXMLFileWithSteps(String expr, String stepsResult, BigNumber resultExpr ) throws ParserConfigurationException, TransformerException {
 
-
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
-
             // root element
             Element rootElement = doc.createElement("expr");
             Attr attr = doc.createAttribute("value");
@@ -31,16 +29,13 @@ public class ResultInXMLFile {
             String[] stepsSplit = stepsResult.split("\n");
 
             for (int i = 0; i < stepsSplit.length; i++) {
-
                 Element carname = doc.createElement("step" + String.valueOf(i));
                 carname.appendChild(doc.createTextNode(stepsSplit[i]));
                 steps.appendChild(carname);
-
             }
             Element resultElement = doc.createElement("result");
             resultElement.appendChild(doc.createTextNode(resultExpr.toString()));
             rootElement.appendChild(resultElement);
-
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -48,11 +43,10 @@ public class ResultInXMLFile {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File("result.xml"));
             transformer.transform(source, result);
-
     }
 
     public static void createXMLFileWithError(String expr, String errorMsg) throws ParserConfigurationException, TransformerException {
-
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
 
@@ -67,8 +61,6 @@ public class ResultInXMLFile {
             errElement.appendChild(doc.createTextNode(errorMsg));
 
             rootElement.appendChild(errElement);
-
-
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

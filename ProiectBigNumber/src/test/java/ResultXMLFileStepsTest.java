@@ -7,7 +7,7 @@ import javax.xml.transform.TransformerException;
 
 import static org.mockito.Mockito.mock;
 
-public class ResultXMLFileTest {
+public class ResultXMLFileStepsTest {
     public String expr;
     public String expr1;
     public String steps;
@@ -33,6 +33,7 @@ public class ResultXMLFileTest {
         resultXMLFileObj.createXMLFileWithSteps(expr,steps,result);
         Mockito.verify(resultXMLFileObj)
                 .createXMLFileWithSteps(expr,steps,result);
+
 
     }
 //    @Test

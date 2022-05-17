@@ -1,6 +1,12 @@
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
+
 public class AutomaticMode {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
         ParseXMLDocument.parseFileXML("input.xml");
         String expXML = ConstructExprWithValue.constructExprWithValue(ParseXMLDocument.expr, ParseXMLDocument.keyValueExp);

@@ -1,6 +1,8 @@
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -10,12 +12,11 @@ import org.w3c.dom.Element;
 import java.io.File;
 
 public class ResultInXMLFile {
+    public static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
-    public static void createXMLFileWithSteps(String expr, String stepsResult, BigNumber resultExpr ) {
+    public static void createXMLFileWithSteps(String expr, String stepsResult, BigNumber resultExpr ) throws ParserConfigurationException, TransformerException {
 
-        try {
 
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
 
@@ -48,17 +49,10 @@ public class ResultInXMLFile {
             StreamResult result = new StreamResult(new File("result.xml"));
             transformer.transform(source, result);
 
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-    public static void createXMLFileWithError(String expr, String errorMsg) {
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    public static void createXMLFileWithError(String expr, String errorMsg) throws ParserConfigurationException, TransformerException {
+
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
 
@@ -83,10 +77,6 @@ public class ResultInXMLFile {
             StreamResult result = new StreamResult(new File("result.xml"));
             transformer.transform(source, result);
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

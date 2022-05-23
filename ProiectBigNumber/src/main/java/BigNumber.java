@@ -46,8 +46,12 @@ public class BigNumber implements Comparable<BigNumber> {
         return this.value.toCharArray();
     }
 
+    //x1.compareTo(x2)
     @Override
     public int compareTo(BigNumber number) {
+
+        assert number != null : "checking if the 2nd number we are trying to compare is not null (x2)";
+        assert this.value != null : "checking if the 1st number we are trying to compare is not null (x1)";
         if (this.length() > number.length())
             return 1;
         if (this.length() < number.length())
@@ -60,6 +64,8 @@ public class BigNumber implements Comparable<BigNumber> {
 
             int valueDigit = Character.getNumericValue(valueChars[i]);
             int numberDigit = Character.getNumericValue(numberChars[i]);
+            assert valueDigit >= 0 && valueDigit <=9:"checking if it is a valid digit";
+            assert numberDigit >= 0 && numberDigit <=9:"checking if it is a valid digit";
 
             if (valueDigit > numberDigit)
                 return 1;
@@ -74,6 +80,9 @@ public class BigNumber implements Comparable<BigNumber> {
     //by adding zeroes to front if one is shorter than the other
     // equalLengths(9998, 68) -> String[] = {9998, 0068}
     public static String[] equalLengths(BigNumber x, BigNumber y) {
+
+        assert x != null : "checking if x is not null";
+        assert y != null : "checking if y is not null";
         String xVal;
         String yVal;
 
@@ -88,12 +97,15 @@ public class BigNumber implements Comparable<BigNumber> {
             xVal = "0".repeat(y.length() - x.length()) + x.getValue();
         }
 
+        assert xVal.length() == yVal.length() : "checking if the numbers have the same length";
         return new String[]{xVal, yVal};
     }
 
     //x1.add(x2) => x1 = x1 + x2;
     public void add(BigNumber number) {
 
+        assert number != null : "checking if the number we are trying to add is not null (x2)";
+        assert this.value != null : "checking if the number to which we add the other number is not null (x1)";
         String[] numbers = equalLengths(number, this);
         char[] valueChars = numbers[0].toCharArray();
         char[] numberChars = numbers[1].toCharArray();
@@ -105,9 +117,14 @@ public class BigNumber implements Comparable<BigNumber> {
 
             int valueDigit = Character.getNumericValue(valueChars[i]);
             int numberDigit = Character.getNumericValue(numberChars[i]);
+            assert valueDigit >= 0 && valueDigit <=9:"checking if it is a valid digit";
+            assert numberDigit >= 0 && numberDigit <=9:"checking if it is a valid digit";
+
             int digitSum = valueDigit + numberDigit + overflow;
+            assert digitSum == valueDigit + numberDigit + overflow:"";
 
             result.append(digitSum % 10);
+            assert result.length() == valueChars.length - i:"checking the length of the resulted number at step i";
             overflow = digitSum / 10;
         }
 
@@ -209,31 +226,31 @@ public class BigNumber implements Comparable<BigNumber> {
         }
     }
 
-    public static String add(String x, String y){
+    public static String add(String x, String y) {
         BigNumber result = new BigNumber(x);
         result.add(new BigNumber(y));
         return result.getValue();
     }
 
-    public static String substract(String x, String y){
+    public static String substract(String x, String y) {
         BigNumber result = new BigNumber(x);
         result.sub(new BigNumber(y));
         return result.getValue();
     }
 
-    public static String multiply(String x, String y){
+    public static String multiply(String x, String y) {
         BigNumber result = new BigNumber(x);
         result.mult(new BigNumber(y));
         return result.getValue();
     }
 
-    public static String divide(String x, int y){
+    public static String divide(String x, int y) {
         BigNumber result = new BigNumber(x);
         result.div(y);
         return result.getValue();
     }
 
-    public static String power(String x, long y){
+    public static String power(String x, long y) {
         BigNumber result = new BigNumber(x);
         System.out.println(x);
         System.out.println(y);

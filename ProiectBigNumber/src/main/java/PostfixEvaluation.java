@@ -16,6 +16,8 @@ public class PostfixEvaluation
 
     static BigNumber evaluatePostfix(String expression)
     {
+        assert expression != null : "given expression must not be null";
+
         StringBuilder steps = new StringBuilder();
         String[] exp = expression.split(" ");
         Stack<BigNumber> postFix = new Stack<>();
@@ -25,6 +27,7 @@ public class PostfixEvaluation
         {
             if(isOperator(exp[i]))
             {
+                assert isOperator(exp[i]) : "Current character is an operator";
                 BigNumber op1 = postFix.pop();
                 BigNumber op2 = postFix.pop();
                 BigNumber result;
@@ -66,7 +69,7 @@ public class PostfixEvaluation
 
             else
             {
-
+                assert !isOperator(exp[i]) : "Current character is an operand";
                 BigNumber operand = new BigNumber(exp[i]);
                 postFix.push(operand);
             }

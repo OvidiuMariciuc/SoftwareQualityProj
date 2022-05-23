@@ -163,7 +163,6 @@ public class BigNumber implements Comparable<BigNumber> {
                 }
 
                 result.append(valueDigit - numberDigit);
-                assert result.length() == valueChars.length - i:"checking the length of the resulted number at step i";
             }
 
             while (result.charAt(result.length() - 1) == '0') {

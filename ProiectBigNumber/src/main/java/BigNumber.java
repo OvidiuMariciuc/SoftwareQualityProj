@@ -177,10 +177,16 @@ public class BigNumber implements Comparable<BigNumber> {
     public void mult(BigNumber y) {
         char[] yChars = y.chars();
         String num = this.getValue();
+
+        assert num.length() > 0: "checking if string is correct";
+
         this.setValue(0);
 
         for (int i = 0; i < y.length(); i++) {
             int digit = Character.getNumericValue(yChars[yChars.length - 1 - i]);
+
+            assert digit >= 0 && digit < 10: "check if digit is correct";
+
             this.add(new BigNumber(multByInt(digit, num, i, 0, new StringBuilder())));
         }
     }
@@ -188,12 +194,18 @@ public class BigNumber implements Comparable<BigNumber> {
     private static String multByInt(int x, String num, int powerOf10, int overflow, StringBuilder sb) {
         if (num.length() == 0) {
 
+            assert powerOf10 >= 0: "check if power of ten is positive";
+            assert overflow >= 0: "check if overflow is positive";
+
             return (overflow == 0 ? "" : Integer.toString(overflow))
                     + sb.reverse().toString()
                     + "0".repeat(powerOf10);
         }
 
         final char digit = num.toCharArray()[num.length() - 1];
+
+        assert digit >= '0' && digit <= '9': "check if digit is correct";
+
         final int product = Character.getNumericValue(digit) * x + overflow;
         sb.append(product % 10);
 
@@ -230,6 +242,7 @@ public class BigNumber implements Comparable<BigNumber> {
     }
 
     public void pow(long n) {
+        assert n >= 0 : "checking if power is positive";
         if (n == 0) {
             this.setValue(1);
         } else {

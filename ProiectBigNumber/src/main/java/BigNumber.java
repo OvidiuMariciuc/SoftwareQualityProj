@@ -106,6 +106,7 @@ public class BigNumber implements Comparable<BigNumber> {
 
         assert number != null : "checking if the number we are trying to add is not null (x2)";
         assert this.value != null : "checking if the number to which we add the other number is not null (x1)";
+        String copyValue = this.value;
         String[] numbers = equalLengths(number, this);
         char[] valueChars = numbers[0].toCharArray();
         char[] numberChars = numbers[1].toCharArray();
@@ -129,11 +130,15 @@ public class BigNumber implements Comparable<BigNumber> {
         }
 
         this.value = (overflow == 0 ? "" : "1") + result.reverse().toString();
+        assert this.value.length() >= copyValue.length():"checking if the length of the result >= x1.length()";
+        assert this.value.length() >= number.length():"checking if the length of the result >= x2.length()";
     }
 
+    //x1.sub(x2) => x1 = x1 - x2;
     public void sub(BigNumber number) {
         assert number != null : "checking if the number ";
         assert this.value != null : "checking if the number ";
+        String copyValue = this.value;
 
         int compare = this.compareTo(number);
         if (compare == 0) {
@@ -152,7 +157,6 @@ public class BigNumber implements Comparable<BigNumber> {
 
                 int valueDigit = Character.getNumericValue(valueChars[i]) + overflow;
                 int numberDigit = Character.getNumericValue(numberChars[i]);
-                assert valueDigit >= 0 && valueDigit <= 9: "checking if it is a valid digit";
                 assert numberDigit >= 0 && numberDigit <= 9: "checking if it is a valid digit";
 
                 overflow = 0;
@@ -165,13 +169,18 @@ public class BigNumber implements Comparable<BigNumber> {
                 result.append(valueDigit - numberDigit);
             }
 
+            int ctZeroes = 0;
             while (result.charAt(result.length() - 1) == '0') {
+                ctZeroes += 1;
                 result.deleteCharAt(result.length() - 1);
             }
+
+            assert result.length() == copyValue.length() - ctZeroes:"checking the length of the result after removing the 0s";
 
             this.setValue(result.reverse().toString());
 
         }
+        assert this.value.length() <= copyValue.length():"checking if the length of the result <= x1.length()";
     }
 
     public void mult(BigNumber y) {

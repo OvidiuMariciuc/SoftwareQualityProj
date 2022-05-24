@@ -121,7 +121,7 @@ public class BigNumber implements Comparable<BigNumber> {
             assert numberDigit >= 0 && numberDigit <=9:"checking if it is a valid digit";
 
             int digitSum = valueDigit + numberDigit + overflow;
-            assert digitSum == valueDigit + numberDigit + overflow:"";
+            assert digitSum == valueDigit + numberDigit + overflow:"checking if digitSum has the right value";
 
             result.append(digitSum % 10);
             assert result.length() == valueChars.length - i:"checking the length of the resulted number at step i";
@@ -132,8 +132,8 @@ public class BigNumber implements Comparable<BigNumber> {
     }
 
     public void sub(BigNumber number) {
-        assert number != null : "checking if the number we are trying to add is not null (x2)";
-        assert this.value != null : "checking if the number to which we add the other number is not null (x1)";
+        assert number != null : "checking if the number ";
+        assert this.value != null : "checking if the number ";
 
         int compare = this.compareTo(number);
         if (compare == 0) {

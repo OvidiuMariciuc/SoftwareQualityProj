@@ -201,6 +201,8 @@ public class BigNumber implements Comparable<BigNumber> {
     }
 
     public void div(int divisor) {
+        assert this.value != null :"checking the number we divide to be different from null";
+
         if (divisor == 0) {
             throw new IllegalArgumentException("the divisor must be different from 0");
         } else {
@@ -209,15 +211,21 @@ public class BigNumber implements Comparable<BigNumber> {
             int overflow = 0;
 
             for (int i = 0; i < dividend.length; i++) {
-                int digit = overflow * 10 + Character.getNumericValue(dividend[i]);
+                int digitDividend = Character.getNumericValue(dividend[i]);
+
+                assert digitDividend >= 0 && digitDividend <= 9: "checking if it is a valid digit";
+
+                int digit = overflow * 10 + digitDividend;
                 quotient.append(digit / divisor);
                 overflow = digit % divisor;
+                assert new BigNumber(divisor).compareTo(new BigNumber(overflow)) == 1 : "Rest < Divisor";
             }
 
             while (quotient.charAt(0) == '0')
                 quotient.deleteCharAt(0);
-
             this.setValue(quotient.toString());
+            // D = I*C+R
+//            assert new BigNumber(BigNumber.multiply(this.getValue(),Integer.toString(divisor))).add(new BigNumber(overflow)).compareTo(new BigNumber(dividend));
         }
     }
 

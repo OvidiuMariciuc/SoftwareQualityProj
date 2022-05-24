@@ -14,6 +14,9 @@ import java.io.File;
 public class ResultInXMLFile {
 
     public static void createXMLFileWithSteps(String expr, String stepsResult, BigNumber resultExpr ) throws ParserConfigurationException, TransformerException {
+            assert expr != null :"expression should be different from null";
+            assert stepsResult != null  :"number of steps should be different from null";
+            assert resultExpr != null : "the result should be different from null";
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -46,6 +49,10 @@ public class ResultInXMLFile {
     }
 
     public static void createXMLFileWithError(String expr, String errorMsg) throws ParserConfigurationException, TransformerException {
+
+            assert expr != null :"expression should be different from null";
+            assert errorMsg != null  :"error message should be different from null";
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();

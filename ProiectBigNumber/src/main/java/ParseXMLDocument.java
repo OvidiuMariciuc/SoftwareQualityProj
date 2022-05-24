@@ -18,10 +18,12 @@ public class ParseXMLDocument {
 
 
     public static void parseFileXML(String fileName) throws ParserConfigurationException, IOException, SAXException {
+        assert fileName != null :"filename should be different from null";
+
         int lastIndexOf = fileName.lastIndexOf(".");
         String currentExtension = fileName.substring(lastIndexOf);
         String expectedExtension = ".xml";
-        System.out.println(fileName.substring(lastIndexOf));
+
         if (!(currentExtension.equals(expectedExtension))) {
             throw new IllegalArgumentException("You must give an xml file as a parameter");
         } else {
@@ -33,6 +35,9 @@ public class ParseXMLDocument {
             expr = doc.getDocumentElement().getAttribute("value");
             for (int i = 0; i <= 25; i++) {
                 char valExp = (char) ('a' + i);
+
+                assert valExp>='a' && valExp<='z' : "valExp should be between a and z";
+
                 NodeList nList = doc.getElementsByTagName(String.valueOf(valExp));
                 for (int temp = 0; temp < nList.getLength(); temp++) {
                     Node nNode = nList.item(temp);
